@@ -22,7 +22,7 @@ sub Main()
         msg = wait(0, m.port)
         msgType = type(msg)
 
-        HandleUrlEvent(msg, xferHandler)
+        HandleUrlEvent(msg, xferHandler, scene)
 
         if msgType = "roSGScreenEvent"
             if msg.isScreenClosed() then return
@@ -31,19 +31,23 @@ sub Main()
 end sub
 
 
-function xferHandler(event as object)
+function xferHandler(event as object, scene as object)
     print "@main urlXfer Request handled"
     code = event.getResponseCode()
 
     if 200 <> Code then
         print "@main xfer failure reason: "; event.getfailureReason()
+        scene.findNode("myLabel").setfield("text", event.getfailureReason())
         return -1
     end if
 
     print "@main response: "
     response$ = event.getString()
     print response$
-    print "@main My public IP: "; ParseJson(response$).ip
+    ip$ = ParseJson(response$).ip
+    print "@main My public IP: "; ip$
+
+    scene.findNode("myLabel").setfield("text", "IP: " + ip$)
 
 end function
 

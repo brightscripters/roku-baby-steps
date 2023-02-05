@@ -12,12 +12,12 @@ function GetAsync(url as string)
     m.pendingXfers[requestId] = newXfer
 end function
 
-function HandleUrlEvent(event as object, fnHandler as object)
+function HandleUrlEvent(event as object, fnHandler as object, scene as object)
     requestId = event.GetSourceIdentity().ToStr()
     xfer = m.pendingXfers[requestId]
     if xfer <> invalid then
         ' process it
-        fnHandler(event)
+        fnHandler(event, scene)
         m.pendingXfers.Delete(requestId)
     end if
 end function

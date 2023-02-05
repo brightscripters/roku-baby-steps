@@ -7,9 +7,13 @@ function init()
 
     'Set the color to light blue
     m.myLabel.color = "0x72D7EEFF"
-
     '**
     '** The full list of editable attributes can be located at:
     '** http://sdkdocs.roku.com/display/sdkdoc/Label#Label-Fields
     '**
 end function
+
+
+sub setLabelText() ' label$, text$
+    m.top.findNode("myLabel").setfield("text", "foo")
+end sub
