@@ -32,8 +32,9 @@ end sub
 
 
 function xferHandler(event as object)
-    print "@Main urlXfer Request handled"
+    print "@main urlXfer Request handled"
     code = event.getResponseCode()
+
     if 200 <> Code then
         print "@main xfer failure reason: "; event.getfailureReason()
         return -1
