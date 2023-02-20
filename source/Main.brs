@@ -14,9 +14,9 @@ sub Main()
     scene = screen.CreateScene("rokuBabySteps")
     screen.show()
 
-    setup()
+    ' setup()
     ' GetAsync("https://api.weather.gov/")
-    GetAsync("http://api64.ipify.org?format=json")
+    ' GetAsync("http://api64.ipify.org?format=json")
 
     while(true)
         msg = wait(0, m.port)
