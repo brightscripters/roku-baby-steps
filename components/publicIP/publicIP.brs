@@ -12,14 +12,14 @@ function init()
     m.GetAsync("http://api64.ipify.org?format=json")
 
 
-    while(true)
-        msg = wait(0, m.port)
+    ' while(true)
+        msg = wait(30000, m.port)
         ' msgType = type(msg)
         print "@publicIP Event in Task"
         m.HandleUrlEvent(msg, xferHandler, invalid)
         ' m.HandleUrlEvent(msg)
 
-    end while
+    ' end while
 
 end function
 
@@ -54,20 +54,20 @@ end function
 
 
 function xferHandler(event as object, scene as object)
-    print "@main urlXfer Request handled"
+    print "@publicIP urlXfer Request handled"
     code = event.getResponseCode()
 
     if 200 <> Code then
-        print "@main xfer failure reason: "; event.getfailureReason()
+        print "@publicIP xfer failure reason: "; event.getfailureReason()
         ' scene.findNode("myLabel").setfield("text", event.getfailureReason())
         return -1
     end if
 
-    print "@main response: "
+    print "@publicIP response: "
     response$ = event.getString()
     print response$
     ip$ = ParseJson(response$).ip
-    print "@main My public IP: "; ip$
+    print "@publicIP My public IP: "; ip$
 
     ' scene.findNode("myLabel").setfield("text", "IP: " + ip$)
 
